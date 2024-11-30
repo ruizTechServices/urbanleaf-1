@@ -56,7 +56,7 @@ const footerLinks = {
   },
 }
 
-function FooterSection({ title, links }) {
+function FooterSection({ title, links }: { title: string, links: { label: string; href: string }[] }) {
   const [isOpen, setIsOpen] = React.useState(false)
 
   return (
@@ -195,10 +195,10 @@ export function Footer() {
         {/* Copyright and Legal */}
         <div className="mt-12 flex flex-col items-center justify-between space-y-4 border-t border-gray-800 pt-8 text-sm md:flex-row md:space-y-0">
           <p className="text-gray-400 text-center md:text-left">
-            © {new Date().getFullYear()} Urban Leaf. All Rights Reserved.
+            &copy; {new Date().getFullYear()} Urban Leaf. All Rights Reserved.
           </p>
           <p className="text-gray-400 text-center md:text-left">
-            © {new Date().getFullYear()} <span><a href="https://ruiztechservices.com">ruizTechServices</a></span><span className="blinking">|</span>, LLC. 
+            &copy; {new Date().getFullYear()} <span><a href="https://ruiztechservices.com">ruizTechServices</a></span><span className="blinking">|</span>, LLC. 
           </p>
           <div className="flex space-x-6">
             <Link
