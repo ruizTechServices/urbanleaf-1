@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/command"
 import { Input } from "@/components/ui/input"
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs"
+import AuthButtonContainer from "./authButton"
 
 export function NavBar() {
     const [open, setOpen] = React.useState(false)
@@ -62,14 +63,15 @@ export function NavBar() {
                     </Link>
                 </div>
                 <div className="flex items-center space-x-2">
-                    <div className="hidden md:flex">
+                    {/* <div className="hover:animate-pulse hidden md:flex rounded-xl border-2 border-black p-2 shadow-lg transition-transform duration-300 hover:bg-gray-100 hover:scale-105 text-green-600 cover bg-gradient-to-br from-yellow-100 to-white to-green-400">
                         <SignedOut>
                             <SignInButton />
                         </SignedOut>
                         <SignedIn>
                             <UserButton />
                         </SignedIn>
-                    </div>
+                    </div> */}
+                    <AuthButtonContainer />
                     <div className="hidden md:flex items-center space-x-2">
                         <Input
                             type="search"
