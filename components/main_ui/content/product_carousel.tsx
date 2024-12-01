@@ -4,10 +4,16 @@ import React, { useState, useEffect, useRef } from 'react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { useMediaQuery } from '@/hooks/use-media-query'
 
+interface Product {
+  id: string;
+  productName: string;
+  productImage: string;
+}
+
 const ProductCarousel = () => {
-  const [products, setProducts] = useState([])
+  const [products, setProducts] = useState<Product[]>([])
   const [currentIndex, setCurrentIndex] = useState(0)
-  const carouselRef = useRef(null)
+  const carouselRef = useRef<HTMLDivElement & { touchStartX?: number }>(null)
 
   const isMobile = useMediaQuery('(max-width: 640px)')
   const isTablet = useMediaQuery('(min-width: 641px) and (max-width: 1024px)')
@@ -45,12 +51,14 @@ const ProductCarousel = () => {
     )
   }
 
-  const handleTouchStart = (e) => {
-    carouselRef.current.touchStartX = e.touches[0].clientX
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (carouselRef.current) {
+      carouselRef.current.touchStartX = e.touches[0].clientX
+    }
   }
 
-  const handleTouchMove = (e) => {
-    if (carouselRef.current.touchStartX) {
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (carouselRef.current && carouselRef.current.touchStartX !== undefined) {
       const touchEndX = e.touches[0].clientX
       const diff = carouselRef.current.touchStartX - touchEndX
       if (Math.abs(diff) > 50) { // Minimum swipe distance
@@ -59,7 +67,7 @@ const ProductCarousel = () => {
         } else {
           handlePrevious()
         }
-        carouselRef.current.touchStartX = null
+        carouselRef.current.touchStartX = undefined
       }
     }
   }
@@ -150,4 +158,3 @@ const ProductCarousel = () => {
 }
 
 export default ProductCarousel
-
